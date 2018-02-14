@@ -3,23 +3,22 @@ package com.mycompany.Starter;
 public class Fixed extends GameObject {
 	
 	public Fixed() {
-		System.out.println("Fixed Object\n");
 	}
 
 	@Override
-	void size() {
+	public int size() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void shape() {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	void shape() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	double location() {
+	public double location() {
 		// TODO Auto-generated method stub
 		return 0;
 	}

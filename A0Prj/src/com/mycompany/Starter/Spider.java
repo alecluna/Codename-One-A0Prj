@@ -1,18 +1,16 @@
 package com.mycompany.Starter;
 
-public class LadyBug extends GameObject {
+public class Spider extends GameObject {
 
 	private int height;
 	private int width;
 	
-	public LadyBug(int height, int width) {
+	public Spider(int height, int width) {
 		
 		this.height = height;
 		this.width = width;
 	}
-	
 	public int size() {
-	
 		
 		return this.height * this.width;
 	}
@@ -21,7 +19,7 @@ public class LadyBug extends GameObject {
 
 		return this.size();
 	}
-
+	
 	@Override
 	public void shape() {
 		// TODO Auto-generated method stub
@@ -33,5 +31,6 @@ public class LadyBug extends GameObject {
 		// TODO Auto-generated method stub
 		return 0;
 	}
-
+	
+	
 }

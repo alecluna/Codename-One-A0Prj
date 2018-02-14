@@ -1,8 +1,8 @@
 package com.mycompany.Starter;
 
-abstract class GameObject{
+public abstract class GameObject{
 	
-	abstract void size();
-	abstract void shape();
-	abstract double location();
+	public abstract int size();
+	public abstract void shape();
+	public abstract double location();
 }

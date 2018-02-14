@@ -15,14 +15,8 @@ public class Game extends Form {
 	}
 
 	private void play() {
-		// code here to accept and
-		// execute user commands that
-		// operate on the game world
-		// (refer to “Appendix - CN1
-		// Notes” for accepting
-		// keyboard commands via a text
-		// field located on the form)
-
+	
+		
 		Form hi = new Form("mobile App", BoxLayout.y());
 		hi.add(new Label("hello"));
 
