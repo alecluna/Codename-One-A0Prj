@@ -1,7 +1,10 @@
 package com.mycompany.Starter;
 
 public class Fixed extends GameObject {
-	
+
+	public static final int WIDTH = 1024;
+	public static final int HEIGHT = 768;
+
 	public Fixed() {
 	}
 
@@ -14,12 +17,23 @@ public class Fixed extends GameObject {
 	@Override
 	public void shape() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
-	public double location() {
-		// TODO Auto-generated method stub
+	public void location() {
+
+		
+	}
+	
+	@Override
+	public double getX() {
 		return 0;
+	}
+
+	@Override
+	public double getY() {
+		return 0;
+
 	}
 }

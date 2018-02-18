@@ -1,36 +1,49 @@
 package com.mycompany.Starter;
 
-public class Spider extends GameObject {
+import com.codename1.charts.util.ColorUtil;
 
-	private int height;
-	private int width;
-	
-	public Spider(int height, int width) {
-		
-		this.height = height;
-		this.width = width;
+public class Spider extends Moveable {
+
+	private int size;
+	public static int BLACK;
+
+	public Spider() {
+
+		this.size = 20; // assigning a fixed number to size of spider
+
 	}
+
 	public int size() {
-		
-		return this.height * this.width;
-	}
-	
-	public int getSize() {
 
-		return this.size();
+		return this.size;
 	}
-	
+
+	public int getColor() {
+		return BLACK;
+	}
+
 	@Override
 	public void shape() {
 		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void location() {
+		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public double location() {
+	public double getX() {
 		// TODO Auto-generated method stub
 		return 0;
 	}
-	
-	
+
+	@Override
+	public double getY() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }
