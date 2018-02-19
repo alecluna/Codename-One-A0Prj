@@ -32,7 +32,14 @@ public class LadyBug extends Moveable implements Steerable{
 	
 	public int getFoodLevel() {
 		
+	/*
+	 * The foodLevel of the ladybug indicates how hungry it is; 
+	 * if the ladybug’s food level is zero, it would have zero speed and cannot move. 
+	 * You should set this value to an initial reasonable value
+	 * 	
+	 */
 		
+		//if 
 		return this.foodLevel;
 	}
 
@@ -41,8 +48,7 @@ public class LadyBug extends Moveable implements Steerable{
 		return RED; 
 	}
 	
-	
-	
+
 	public int getSpeed() {
 		return 0;
 	}
@@ -61,18 +67,6 @@ public class LadyBug extends Moveable implements Steerable{
 	@Override
 	public void location() {
 		// TODO Auto-generated method stub
-	}
-
-	@Override
-	public double getX() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public double getY() {
-		// TODO Auto-generated method stub
-		return 0;
 	}
 
 	public void changeHeading() {

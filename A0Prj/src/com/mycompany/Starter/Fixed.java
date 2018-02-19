@@ -1,39 +1,24 @@
 package com.mycompany.Starter;
 
-public class Fixed extends GameObject {
+public abstract class Fixed extends GameObject {
 
-	public static final int WIDTH = 1024;
-	public static final int HEIGHT = 768;
-
-	public Fixed() {
-	}
-
-	@Override
-	public int size() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public void shape() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void location() {
-
-		
-	}
+private int objectID; //id for every fixed object
 	
-	@Override
-	public double getX() {
-		return 0;
+	public Fixed(int r, int g, int b) //foodstations and flags
+	{
+		super(r,g,b);
+		objectID = objectID +1;
 	}
-
-	@Override
-	public double getY() {
-		return 0;
-
+	public void setLocX()
+	{
+		System.out.println("Error: Location cannot be set");
+	}
+	public void setLocY()
+	{
+		System.out.println("Error: Location cannot be set");
+	}
+	public int getIdentification()
+	{
+		return objectID;
 	}
 }

@@ -52,22 +52,11 @@ public class Flag extends Fixed{
 	@Override
 	public void location() {
 
-		if (isLocationGood()) {
-			System.out.println("Location is:" + getX() + " " + getY());
+		/*if (isLocationGood()) {
+			System.out.println("Location is:" + super.getX() + " " + super.getY());
 		} else
-			System.out.println("Error: location fell outside the boundaries");
+			System.out.println("Error: location fell outside the boundaries");*/
 	}
 
-	@Override
-	public double getX() {
-		return this.x;
-	}
-
-	@Override
-	public double getY() {
-		return this.y;
-
-	}
-	
 	
 }
