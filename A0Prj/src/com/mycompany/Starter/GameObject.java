@@ -12,6 +12,9 @@ public abstract class GameObject {
 	private int color;
 	private Random rand = new Random();
 
+	public GameObject() {
+	}
+
 	public GameObject(double x, double y, int r, int g, int b) {
 
 		locX = x;
@@ -19,10 +22,10 @@ public abstract class GameObject {
 		color = ColorUtil.rgb(r, g, b);
 	}
 
-	public GameObject(int r, int g, int b) { //initialize random objects
-		locX = (double) rand.nextInt(1024);
+	public GameObject(int r, int g, int b) { // initialize random objects
+		locX = (double) rand.nextInt(1024); // type cast to double for points
 		locY = (double) rand.nextInt(768);
-		color = ColorUtil.rgb(r, g, b); 	 //initialize color
+		color = ColorUtil.rgb(r, g, b); // initialize color
 	}
 
 	public void setLocX(double x) {
@@ -48,14 +51,13 @@ public abstract class GameObject {
 		}
 
 	}
-	
-	public void setColor(int r, int g, int b)
-	{
+
+	public void setColor(int r, int g, int b) {
 		color = ColorUtil.rgb(r, g, b);
 
 	}
 
-	public double getLocX() { //getters
+	public double getLocX() { // getters
 		return locX;
 	}
 
@@ -63,7 +65,7 @@ public abstract class GameObject {
 		return locY;
 	}
 
-	public int getRed() {     // more getters 
+	public int getRed() { // more getters
 		return ColorUtil.red(color);
 	}
 

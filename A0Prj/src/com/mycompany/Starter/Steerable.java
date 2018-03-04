@@ -2,6 +2,6 @@ package com.mycompany.Starter;
 
 public interface Steerable {
 	
-	public void changeHeading();
-	
+	void leftHeading();
+	void rightHeading();	
 }

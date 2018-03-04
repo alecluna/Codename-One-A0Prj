@@ -2,23 +2,26 @@ package com.mycompany.Starter;
 
 public abstract class Fixed extends GameObject {
 
-private int objectID; //id for every fixed object
-	
-	public Fixed(int r, int g, int b) //foodstations and flags
-	{
-		super(r,g,b);
-		objectID = objectID +1;
+	private int objectID; // id for every fixed object
+
+	public Fixed() {
 	}
-	public void setLocX()
+
+	public Fixed(int r, int g, int b) // foodstations and flags
 	{
+		super(r, g, b);
+		objectID = objectID + 1;
+	}
+
+	public void setLocX() {
 		System.out.println("Error: Location cannot be set");
 	}
-	public void setLocY()
-	{
+
+	public void setLocY() {
 		System.out.println("Error: Location cannot be set");
 	}
-	public int getIdentification()
-	{
+
+	public int getId() {
 		return objectID;
 	}
 }

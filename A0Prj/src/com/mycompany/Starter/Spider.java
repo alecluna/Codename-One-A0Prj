@@ -1,38 +1,42 @@
 package com.mycompany.Starter;
 
-import com.codename1.charts.util.ColorUtil;
+import java.util.Random;
 
 public class Spider extends Moveable {
 
 	private int size;
-	public static int BLACK;
+	private int speed;
+	public Random rand = new Random();
 
 	public Spider() {
 
-		this.size = 20; // assigning a fixed number to size of spider
-
+		super(0, 0, 0);
+		this.size = 25; // assigning a fixed number to size of spider
+		this.speed = 5;
 	}
 
-	public int size() {
-
-		return this.size;
+	public void leftHeading() {
+		super.setDirection((super.getDirection() - 6));
 	}
 
-	public int getColor() {
-		return BLACK;
+	public void rightHeading() {
+		super.setDirection(super.getDirection() + 6);
 	}
 
-	@Override
-	public void shape() {
-		// TODO Auto-generated method stub
+	public int getSize() {
 
+		return size;
 	}
 
-	@Override
-	public void location() {
-		// TODO Auto-generated method stub
-		
+	public int getSpeed() {
+		return speed;
 	}
 
+	public String toString() {
+
+		return ("Spider: loc=" + super.getLocX() + ", " + super.getLocY() + " color=[" + super.getRed() + ", "
+				+ super.getGreen() + ", " + "" + super.getBlue() + "] heading=" + super.getDirection() + " Speed= "
+				+ getSpeed() + " Size = " + getSize());
+	}
 
 }

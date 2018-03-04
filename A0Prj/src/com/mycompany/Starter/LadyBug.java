@@ -1,77 +1,99 @@
 package com.mycompany.Starter;
 
-import com.codename1.charts.util.ColorUtil;
+public class LadyBug extends Moveable implements Steerable {
 
-public class LadyBug extends Moveable implements Steerable{
-
-	private int size;
-	public static int RED;
 	private int maximumSpeed;
 	private int foodLevel;
 	private int foodConsumptionRate;
 	private int healthLevel;
 	private int lastFlagReached;
+	private int size;
 
 	public LadyBug() {
-
-		this.size = 20; // assigning a fixed number to the size of the ladybug
+		super(255, 0, 0);
+		super.initialSpeed(0);
+		super.setDirection(0);
 		this.maximumSpeed = 50;
 		this.healthLevel = 10;
-		this.lastFlagReached = 1;
+		this.foodConsumptionRate = 5;
+		this.foodLevel = 30;
+		this.size = 25;
 	}
 	
+	public int setLastFlagReached(int flag) {
+		
+		this.lastFlagReached = flag;
+		return lastFlagReached;
+	}
+
 	public int getLastFlagReached() {
-		
-		return this.lastFlagReached;
+		return lastFlagReached;
 	}
 
-	public int size() {
-
-		return this.size;
+	public int getfoodConsumptionRate() {
+		return foodConsumptionRate;
 	}
 	
+	public int setFoodLevel() {
+		
+		return getFoodLevel() + 20;
+	}
+
 	public int getFoodLevel() {
-		
-	/*
-	 * The foodLevel of the ladybug indicates how hungry it is; 
-	 * if the ladybug’s food level is zero, it would have zero speed and cannot move. 
-	 * You should set this value to an initial reasonable value
-	 * 	
-	 */
-		
-		//if 
-		return this.foodLevel;
-	}
-
-	public int getColor() {
-
-		return RED; 
+		return foodLevel;
 	}
 	
+	public int subFoodLevel(int foodLevel) {
+		return foodLevel-this.foodConsumptionRate;
+	}
 
-	public int getSpeed() {
-		return 0;
+	public int getHealthLevel() {
+		return healthLevel;
 	}
 
 	public int getSize() {
-
-		return this.size();
+		return size;
 	}
 
-	@Override
-	public void shape() {
-		// TODO Auto-generated method stub
-
+	public int getMaximumSpeed() {
+		return maximumSpeed;
 	}
 
-	@Override
-	public void location() {
-		// TODO Auto-generated method stub
+	public int minusHealthLevel() {
+
+		return this.healthLevel--;
 	}
 
-	public void changeHeading() {
-		// TODO Auto-generated method stub
-		
+	public void leftHeading() {
+		super.setDirection((super.getDirection() - 6));
 	}
 
+	public void rightHeading() {
+		super.setDirection(super.getDirection() + 6);
+	}
+
+	public String toString() {
+		return ("LadyBug: loc=" + super.getLocX() + ", " + super.getLocY() + " color=[" + super.getRed() + ", "
+				+ super.getGreen() + ", " + super.getBlue() + "] speed=" + super.getSpeed() + " heading ="
+				+ super.getDirection() + "maxSpeed= " + getMaximumSpeed() + " foodConsumptionRate= "
+				+ getfoodConsumptionRate());
+	}
+
+	public void increaseSpeed() {
+
+		if (super.getSpeed() == maximumSpeed) {
+
+			System.out.println("Error: Maximum speed reached");
+		} else if (getFoodLevel() == 0) {
+			System.out.println("Food Level 0, can't increase speed");
+		} else {
+
+			super.initialSpeed(getSpeed() + 1);
+			;
+		}
+	}
+
+	public void decreaseSpeed() {
+		super.initialSpeed(getSpeed() - 1);
+	}
 }
