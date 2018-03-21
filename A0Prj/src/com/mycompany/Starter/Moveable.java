@@ -18,7 +18,7 @@ public class Moveable extends GameObject {
 
 	public void move() {
 
-		double oldX = super.getLocX();      //referencing locatations in gameobject parent class
+		double oldX = super.getLocX();      //referencing locations in gameobject parent class
 		double oldY = super.getLocY();
 
 		double degree = Math.toRadians(90 - heading);
@@ -49,7 +49,7 @@ public class Moveable extends GameObject {
 			speed = 0;
 		} else if (s > 10) {
 			speed = 10;
-		} else {
+		} else { 
 			speed = s;
 		}
 	}

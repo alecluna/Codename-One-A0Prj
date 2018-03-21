@@ -21,7 +21,7 @@ public abstract class Fixed extends GameObject {
 		System.out.println("Error: Location cannot be set");
 	}
 
-	public int getId() {
+	public int getId() { //so we can retreive each objects ID when necessary
 		return objectID;
 	}
 }

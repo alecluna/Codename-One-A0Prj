@@ -36,7 +36,6 @@ public abstract class GameObject {
 			locX = WIDTH;
 		} else {
 			locX = 0.0;
-
 		}
 	}
 

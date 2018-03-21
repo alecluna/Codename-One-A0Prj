@@ -1,20 +1,32 @@
 package com.mycompany.Starter;
 
-import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.Observable;
 
-public class GameWorld {
+
+public class GameWorld extends Observable {
 
 	private LadyBug player;
 	private int lives = 3;
-	private int playerCount = 0; // error checking so we dont add stuff before a ladybug
+	private int ladyBugCounter = 0; // error checking so we dont add stuff before a ladybug
 	private int time = 0;
 	private int lastFlagReached = 0;
-	private ArrayList<Object> list;
+	private boolean soundOn;
+
+	private GameObjectCollection collection;
 
 	public GameWorld() {
 
-		this.list = new ArrayList<Object>();// Creating arraylist
+		// deprecate arraylist
+		this.collection = new GameObjectCollection();
+	}
 
+	public boolean getSound() {
+		return soundOn;
+	}
+
+	public void setSound(boolean toggle) {
+		this.soundOn = toggle;
 	}
 
 	public void init() {
@@ -31,7 +43,7 @@ public class GameWorld {
 	}
 
 	public void increaseSpeed() {
-		if (playerCount == 0) {
+		if (ladyBugCounter == 0) {
 			System.out.println("there is no LadyBug.");
 		} else {
 			player.increaseSpeed();
@@ -40,7 +52,7 @@ public class GameWorld {
 	}
 
 	public void decreaseSpeed() {
-		if (playerCount == 0) {
+		if (ladyBugCounter == 0) {
 			System.out.println("there is no LadyBug.");
 		} else {
 			player.decreaseSpeed();
@@ -50,38 +62,38 @@ public class GameWorld {
 	}
 
 	public void addFoodStation() {
-		if (playerCount == 0) {
+		if (ladyBugCounter == 0) {
 			System.out.println("there is no LadyBug.");
 		}
 		FoodStation foodstation = new FoodStation();
-		this.list.add(foodstation);
+		this.collection.add(foodstation); // switched arraylist for collection.add()
 		System.out.println(foodstation.toString());
 	}
 
 	public void addFlag() {
-		if (playerCount == 0) {
+		if (ladyBugCounter == 0) {
 			System.out.println("there is no LadyBug.");
 		}
 		Flag flag = new Flag(1, 2);
-		this.list.add(flag);
+		this.collection.add(flag); // switched arraylist for collection.add()
 		System.out.println(flag.toString());
 	}
 
 	public void addSpider() {
-		if (playerCount == 0) {
+		if (ladyBugCounter == 0) {
 			System.out.println("there is no LadyBug.");
 		}
 		Spider spider = new Spider();
-		this.list.add(spider);
+		this.collection.add(spider); // switched arraylist for collection.add()
 		System.out.println(spider.toString());
 	}
 
 	public void addLadyBug()// LadyBug (the player) is created
 	{
-		if (playerCount < 1) {
+		if (ladyBugCounter < 1) {
 			player = new LadyBug();
-			this.list.add(player);
-			playerCount++;
+			this.collection.add(player); // switched arraylist to this.collection.add()
+			ladyBugCounter++;
 			System.out.println(player.toString());
 
 		} else {
@@ -90,7 +102,7 @@ public class GameWorld {
 	}
 
 	public void steerLeft() {
-		if (playerCount == 0) {
+		if (ladyBugCounter == 0) {
 			System.out.println("there is no LadyBug.");
 		}
 		player.leftHeading();
@@ -98,7 +110,7 @@ public class GameWorld {
 	}
 
 	public void steerRight() {
-		if (playerCount == 0) {
+		if (ladyBugCounter == 0) {
 			System.out.println("there is no LadyBug.");
 		}
 		player.rightHeading();
@@ -112,24 +124,57 @@ public class GameWorld {
 		System.out.println("Elapsed Time: " + time);
 	}
 
+	// implementing getters for Observable class
+	public int getHealthLevel() {
+
+		return player.getHealthLevel();
+	}
+
+	public int getLastFlagReached() {
+
+		return player.getLastFlagReached();
+	}
+
+	public int getfoodLevel() {
+
+		return player.getFoodLevel();
+	}
+
+	public int getTime() {
+
+		return this.time;
+	}
+
+	public int getLivesLeft() {
+
+		return this.lives;
+	}
+
+	// tick function will iterate through collection and update any state changes
 	public void tick() {
 
-		for (int element = 0; element < this.list.size(); element++) {
-			if (this.list.get(element) instanceof Moveable) {
-				Moveable move = (Moveable) list.get(element);
+		Iterator<GameObject> myIterator = collection.getIterator();
+
+		while (myIterator.hasNext()) {
+			GameObject item = myIterator.next(); // testing for instances of certain objects
+			if (item instanceof Moveable) {
+				Moveable move = (Moveable) item;
 				move.move();
 			}
-			if (this.list.get(element) instanceof LadyBug) {
-				player.subFoodLevel(player.getFoodLevel());
-			}
+			if (item instanceof LadyBug) {
+				int newFoodLevel = this.player.getFoodLevel() - this.player.getfoodConsumptionRate();
+				this.player.subFoodLevel(newFoodLevel);
 
+			}
 		}
-		time++; // incremement the time
-		System.out.println("time has ticked");
+
+		time++; // increment time
+		System.out.println("Clock has ticked");
+
 	}
 
 	public void hitFlag() {
-		if (playerCount == 0) {
+		if (ladyBugCounter == 0) {
 			System.out.println("there is no LadyBug.");
 		}
 
@@ -138,45 +183,56 @@ public class GameWorld {
 	}
 
 	public void removeFlag() {
-		if (playerCount == 0) {
+		if (ladyBugCounter == 0) {
 			System.out.println("there is no LadyBug.");
 		}
-		for (int element = 0; element < this.list.size(); element++) {
-			if (this.list.get(element) instanceof Flag) {
-				list.remove(element);
+
+		// removing 1 flag from the collection
+		Iterator<GameObject> myIterator = collection.getIterator();
+		while (myIterator.hasNext()) {
+			GameObject item = myIterator.next();
+			if (item instanceof Flag) {
+				collection.remove(item);
 				break;
 			}
 		}
 	}
 
 	public void removeFoodStation() {
-		if (playerCount == 0) {
+		if (ladyBugCounter == 0) {
 			System.out.println("there is no LadyBug.");
 		}
-		for (int element = 0; element < this.list.size(); element++) {
-			if (this.list.get(element) instanceof FoodStation) {
-				list.remove(element);
-				player.setLastFlagReached(this.lastFlagReached++);
+
+		// removing 1 food station from collection
+		Iterator<GameObject> myIterator = collection.getIterator();
+		while (myIterator.hasNext()) {
+			GameObject item = myIterator.next();
+			if (item instanceof FoodStation) {
+				collection.remove(item);
 				break;
 			}
 		}
 	}
 
 	public void Map() {
-		if (playerCount == 0) {
+		if (ladyBugCounter == 0) {
 			System.out.println("there is no LadyBug.");
 		}
 		System.out.println("Displaying Map:");
-		for (int element = 0; element < this.list.size(); element++) {
-			System.out.println(this.list.get(element).toString());
+
+		// iterate through entire collection to display their toStrings()
+		Iterator<GameObject> myIterator = collection.getIterator();
+		while (myIterator.hasNext()) {
+
+			GameObject itemInCollection = myIterator.next();
+			System.out.println(itemInCollection.toString());
 
 		}
-
 	}
 
 	public void playerHit() // spider hits ladybug
 	{
-		if (playerCount == 0) {
+		if (ladyBugCounter == 0) {
 			System.out.println("there is no LadyBug.");
 		}
 
@@ -187,5 +243,15 @@ public class GameWorld {
 		if (lives <= 0) {
 			System.out.println("You Lost! Quit to restart");
 		}
+	}
+
+	public void addObserver(Observer obj) {
+		// TODO Auto-generated method stub
+
+	}
+
+	public void notifyObserver() {
+		// TODO Auto-generated method stub
+
 	}
 }

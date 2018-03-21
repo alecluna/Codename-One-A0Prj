@@ -65,17 +65,17 @@ public class LadyBug extends Moveable implements Steerable {
 	}
 
 	public void leftHeading() {
-		super.setDirection((super.getDirection() - 6));
+		super.setDirection((super.getDirection() - 90));
 	}
 
 	public void rightHeading() {
-		super.setDirection(super.getDirection() + 6);
+		super.setDirection(super.getDirection() + 90);
 	}
 
 	public String toString() {
 		return ("LadyBug: loc=" + super.getLocX() + ", " + super.getLocY() + " color=[" + super.getRed() + ", "
-				+ super.getGreen() + ", " + super.getBlue() + "] speed=" + super.getSpeed() + " heading ="
-				+ super.getDirection() + "maxSpeed= " + getMaximumSpeed() + " foodConsumptionRate= "
+				+ super.getGreen() + ", " + super.getBlue() + "] speed= " + super.getSpeed() + " " + " heading = "
+				+ super.getDirection() + " " + " maxSpeed= " + getMaximumSpeed() + " " + " foodConsumptionRate= "
 				+ getfoodConsumptionRate());
 	}
 
@@ -88,12 +88,12 @@ public class LadyBug extends Moveable implements Steerable {
 			System.out.println("Food Level 0, can't increase speed");
 		} else {
 
-			super.initialSpeed(getSpeed() + 1);
+			super.initialSpeed(getSpeed() + 15);
 			;
 		}
 	}
 
 	public void decreaseSpeed() {
-		super.initialSpeed(getSpeed() - 1);
+		super.initialSpeed(getSpeed() - 15);
 	}
 }

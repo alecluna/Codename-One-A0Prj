@@ -9,16 +9,34 @@ import java.lang.String;
 
 public class Game extends Form {
 	private GameWorld gw;
+	// private MapView mv; need to build this
+	// private scoreView sv; need to build this
 
 	public Game() {
 		gw = new GameWorld();
 		gw.init();
 		play();
 
+		/*
+		 * mv = new MapView(); // create an “Observer” for the map sv = new ScoreView();
+		 * // create an “Observer” for the game state data gw.addObserver(mv); //
+		 * register the map observer gw.addObserver(sv); // register the score observer
+		 */
 	}
 
+	/*
+	 * public class GameWorld extends Observable { public void init(){ //code here
+	 * to create the initial game objects } // additional methods here to manipulate
+	 * game objects and related game state data } }
+	 
+	
+	public class ScoreView extends Container implements Observer {  public void update (Observable o, Object arg) {   
+		// code here to update labels from the game state data   } } 
+	}
+	*/
+	
 	private void play() {
-		Label myLabel = new Label("Press S to create a LadyBug: "); //taken from notes
+		Label myLabel = new Label("Press S to create a LadyBug: "); // taken from notes
 		this.addComponent(myLabel);
 		final TextField myTextField = new TextField();
 		this.addComponent(myTextField);
@@ -70,13 +88,14 @@ public class Game extends Form {
 					gw.Map();// print a map showing current world state
 					break;
 
-				case 'q': 
-					gw.quit(); 
+				case 'q':
+					gw.quit();
 
-					final TextField myTextField2 = new TextField(); // will ask the user if they want to quit, then will have to confirm
+					final TextField myTextField2 = new TextField(); // will ask the user if they want to quit, then will
+																	// have to confirm
 					addComponent(myTextField2);
 					removeComponent(myTextField);
-					show(); 
+					show();
 					myTextField2.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent evt2) {
 							String sCommand2 = myTextField2.getText().toString();
@@ -85,8 +104,7 @@ public class Game extends Form {
 
 							if (sCommand2.charAt(0) == 'y') { // displays the yes or no for if the user wants to quit
 								gw.quit2();
-							} else if (sCommand2.charAt(0) == 'n') 
-							{
+							} else if (sCommand2.charAt(0) == 'n') {
 								addComponent(myTextField);
 								removeComponent(myTextField2);
 								show();
