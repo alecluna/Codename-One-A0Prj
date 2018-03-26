@@ -1,37 +1,46 @@
 package com.mycompany.Starter;
 
-import java.util.Iterator;
+import com.mycompany.Starter.GameObject;
 import java.util.Vector;
 
-public class GameObjectCollection {
-	private Vector<GameObject> collection;
+public class GameObjectCollection implements MyCollection{
+	@SuppressWarnings("rawtypes")
+	private Vector collection;
 
+	@SuppressWarnings("rawtypes")
 	public GameObjectCollection() {
-		collection = new Vector<GameObject>();
+		collection = new Vector();
 	}
 
-	public void add(GameObject newObject) { //pass in new Objects when adding objects in game
+	@SuppressWarnings("unchecked")
+	public void add(GameObject newObject) { // pass in new Objects when adding objects in game
 		collection.addElement(newObject);
 	}
 
-	public boolean remove(GameObject obj) {
+	public boolean remove(GameObject obj) { // remove object in collection
 		return collection.remove(obj);
 	}
 
-	public Iterator<GameObject> getIterator() {
-		return new GameObjectIterator();
+	public GameObjectIterator getIterator() { // create new Iterator that is created below
+		return new GameObjectIterator(); // will be using multiple iterators within the program
 	}
 
 	public int size() {
 		return collection.size();
 	}
 
-	private class GameObjectIterator implements Iterator<GameObject> { // my implementation of an iterator
+	public class GameObjectIterator implements MyIterator { // my implementation of an iterator
 
 		private int cur;
 
 		public GameObjectIterator() {
 			cur = -1;
+		}
+
+		public GameObject getNext() {
+
+			cur++;
+			return (GameObject) (collection.elementAt(cur));
 		}
 
 		public boolean hasNext() {
@@ -40,15 +49,28 @@ public class GameObjectCollection {
 			return (collection.size() < 0 || cur == collection.size() - 1) ? false : isHasNextTrue; // ternary
 		}
 
-		public GameObject next() {
-
-			cur++;
-			return (collection.elementAt(cur));
-		}
-
-		public void remove() { // remove is not needed
+		// needed to implement iterator
+		public void remove() {
 
 		}
+
+		public Object next() {
+			// TODO Auto-generated method stub
+			return null;
+		}
+		// private int cur;
+		//
+		// public GameObjectIterator() {
+		// cur = -1;
+		// }
+		//
+
+		//
+
+		//
+		// public void remove() { // remove is not needed
+		//
+		// }
 
 	}
 }

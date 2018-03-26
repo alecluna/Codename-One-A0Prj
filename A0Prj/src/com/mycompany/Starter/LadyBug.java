@@ -19,9 +19,9 @@ public class LadyBug extends Moveable implements Steerable {
 		this.foodLevel = 30;
 		this.size = 25;
 	}
-	
+
 	public int setLastFlagReached(int flag) {
-		
+
 		this.lastFlagReached = flag;
 		return lastFlagReached;
 	}
@@ -33,18 +33,18 @@ public class LadyBug extends Moveable implements Steerable {
 	public int getfoodConsumptionRate() {
 		return foodConsumptionRate;
 	}
-	
+
 	public int setFoodLevel() {
-		
+
 		return getFoodLevel() + 20;
 	}
 
 	public int getFoodLevel() {
 		return foodLevel;
 	}
-	
+
 	public int subFoodLevel(int foodLevel) {
-		return foodLevel-this.foodConsumptionRate;
+		return foodLevel - this.foodConsumptionRate;
 	}
 
 	public int getHealthLevel() {
@@ -61,7 +61,7 @@ public class LadyBug extends Moveable implements Steerable {
 
 	public int minusHealthLevel() {
 
-		return this.healthLevel--;
+		return this.healthLevel - 2;
 	}
 
 	public void leftHeading() {

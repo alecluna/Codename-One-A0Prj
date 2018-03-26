@@ -1,8 +1,13 @@
 package com.mycompany.Starter;
 
-import java.util.Iterator;
 import java.util.Observable;
-
+import com.mycompany.Starter.LadyBug;
+import com.mycompany.Starter.GameObject;
+import com.mycompany.Starter.FoodStation;
+import com.mycompany.Starter.Moveable;
+import com.mycompany.Starter.Spider;
+import com.mycompany.Starter.Flag;
+import com.mycompany.Starter.GameObjectCollection;
 
 public class GameWorld extends Observable {
 
@@ -21,15 +26,24 @@ public class GameWorld extends Observable {
 		this.collection = new GameObjectCollection();
 	}
 
+	public GameObjectCollection getGameObjects() // returns set of entire objects in collection
+	{
+		return collection; // return type is GameObjectCollection
+	}
+
 	public boolean getSound() {
 		return soundOn;
 	}
 
-	public void setSound(boolean toggle) {
+	public void toggleSound(boolean toggle) {
 		this.soundOn = toggle;
+		updateWorld();
+
 	}
 
 	public void init() {
+
+		updateWorld();
 	}
 
 	public void quit() {
@@ -40,6 +54,11 @@ public class GameWorld extends Observable {
 	public void quit2()// System exit function
 	{
 		System.exit(0);
+	}
+
+	public void updateWorld() {
+		setChanged();
+		notifyObservers();
 	}
 
 	public void increaseSpeed() {
@@ -68,6 +87,8 @@ public class GameWorld extends Observable {
 		FoodStation foodstation = new FoodStation();
 		this.collection.add(foodstation); // switched arraylist for collection.add()
 		System.out.println(foodstation.toString());
+		updateWorld();
+
 	}
 
 	public void addFlag() {
@@ -77,6 +98,8 @@ public class GameWorld extends Observable {
 		Flag flag = new Flag(1, 2);
 		this.collection.add(flag); // switched arraylist for collection.add()
 		System.out.println(flag.toString());
+		updateWorld();
+
 	}
 
 	public void addSpider() {
@@ -86,6 +109,8 @@ public class GameWorld extends Observable {
 		Spider spider = new Spider();
 		this.collection.add(spider); // switched arraylist for collection.add()
 		System.out.println(spider.toString());
+		updateWorld();
+
 	}
 
 	public void addLadyBug()// LadyBug (the player) is created
@@ -95,6 +120,7 @@ public class GameWorld extends Observable {
 			this.collection.add(player); // switched arraylist to this.collection.add()
 			ladyBugCounter++;
 			System.out.println(player.toString());
+			updateWorld();
 
 		} else {
 			System.out.println("Error: LadyBug cannot be created");
@@ -127,17 +153,31 @@ public class GameWorld extends Observable {
 	// implementing getters for Observable class
 	public int getHealthLevel() {
 
-		return player.getHealthLevel();
+		if (ladyBugCounter == 0) {
+			System.out.println("there is no LadyBug.");
+			return 0;
+		} else {
+			return player.getHealthLevel();
+		}
 	}
 
 	public int getLastFlagReached() {
+
+		if (ladyBugCounter == 0) {
+			System.out.println("there is no LadyBug.");
+		}
 
 		return player.getLastFlagReached();
 	}
 
 	public int getfoodLevel() {
 
-		return player.getFoodLevel();
+		if (ladyBugCounter == 0) {
+			System.out.println("there is no LadyBug.");
+			return 0;
+		} else {
+			return player.getFoodLevel();
+		}
 	}
 
 	public int getTime() {
@@ -153,10 +193,10 @@ public class GameWorld extends Observable {
 	// tick function will iterate through collection and update any state changes
 	public void tick() {
 
-		Iterator<GameObject> myIterator = collection.getIterator();
+		MyIterator myIterator = (MyIterator) collection.getIterator();
 
 		while (myIterator.hasNext()) {
-			GameObject item = myIterator.next(); // testing for instances of certain objects
+			GameObject item = myIterator.getNext(); // testing for instances of certain objects
 			if (item instanceof Moveable) {
 				Moveable move = (Moveable) item;
 				move.move();
@@ -188,14 +228,24 @@ public class GameWorld extends Observable {
 		}
 
 		// removing 1 flag from the collection
-		Iterator<GameObject> myIterator = collection.getIterator();
+		MyIterator myIterator = (MyIterator) collection.getIterator();
 		while (myIterator.hasNext()) {
-			GameObject item = myIterator.next();
+			GameObject item = myIterator.getNext();
 			if (item instanceof Flag) {
 				collection.remove(item);
 				break;
 			}
 		}
+	}
+
+	public void hitFoodStation() {
+
+		if (ladyBugCounter == 0) {
+			System.out.println("there is no LadyBug.");
+		}
+
+		player.setFoodLevel();
+		removeFoodStation();
 	}
 
 	public void removeFoodStation() {
@@ -204,9 +254,9 @@ public class GameWorld extends Observable {
 		}
 
 		// removing 1 food station from collection
-		Iterator<GameObject> myIterator = collection.getIterator();
+		MyIterator myIterator = (MyIterator) collection.getIterator();
 		while (myIterator.hasNext()) {
-			GameObject item = myIterator.next();
+			GameObject item = myIterator.getNext();
 			if (item instanceof FoodStation) {
 				collection.remove(item);
 				break;
@@ -221,10 +271,10 @@ public class GameWorld extends Observable {
 		System.out.println("Displaying Map:");
 
 		// iterate through entire collection to display their toStrings()
-		Iterator<GameObject> myIterator = collection.getIterator();
+		MyIterator myIterator = (MyIterator) collection.getIterator();
 		while (myIterator.hasNext()) {
 
-			GameObject itemInCollection = myIterator.next();
+			GameObject itemInCollection = myIterator.getNext();
 			System.out.println(itemInCollection.toString());
 
 		}
@@ -243,6 +293,10 @@ public class GameWorld extends Observable {
 		if (lives <= 0) {
 			System.out.println("You Lost! Quit to restart");
 		}
+
+		System.out.println("Player was hit by spider");
+		player.minusHealthLevel();
+
 	}
 
 	public void addObserver(Observer obj) {
