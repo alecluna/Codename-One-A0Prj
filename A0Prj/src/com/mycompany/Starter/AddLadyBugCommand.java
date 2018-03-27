@@ -9,13 +9,19 @@ public class AddLadyBugCommand extends Command {
 	private GameWorld gw;
 
 	public AddLadyBugCommand(GameWorld gw) {
-		super("Add Ladybug to Play"); // set text in parent button class
+		super("Add Ladybug"); // set text in parent button class
 		this.gw = gw; // new gameworld instance
 	}
 
 	public static AddLadyBugCommand getInstance(GameWorld gw) { //return type is of AccelerateCommand object
 
-		return (addLadybug == null) ? addLadybug = new AddLadyBugCommand(gw) : addLadybug; // ternary syntactic sugar
+		//return (addLadybug == null) ? addLadybug = new AddLadyBugCommand(gw) : addLadybug; // ternary syntactic sugar
+		if(addLadybug == null)
+		{
+			addLadybug = new AddLadyBugCommand(gw);
+		}
+		
+		return addLadybug;
 	}
 
 	public static void setPlace(GameWorld gw) {

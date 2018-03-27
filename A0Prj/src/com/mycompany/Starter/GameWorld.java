@@ -68,6 +68,7 @@ public class GameWorld extends Observable {
 			player.increaseSpeed();
 			System.out.println(player.toString());
 		}
+
 	}
 
 	public void decreaseSpeed() {
@@ -76,7 +77,6 @@ public class GameWorld extends Observable {
 		} else {
 			player.decreaseSpeed();
 			System.out.println(player.toString());
-
 		}
 	}
 
@@ -105,23 +105,24 @@ public class GameWorld extends Observable {
 	public void addSpider() {
 		if (ladyBugCounter == 0) {
 			System.out.println("there is no LadyBug.");
+		} else {
+			Spider spider = new Spider();
+			this.collection.add(spider); // switched arraylist for collection.add()
+			System.out.println(spider.toString());
+			updateWorld();
 		}
-		Spider spider = new Spider();
-		this.collection.add(spider); // switched arraylist for collection.add()
-		System.out.println(spider.toString());
-		updateWorld();
 
 	}
 
 	public void addLadyBug()// LadyBug (the player) is created
 	{
-		if (ladyBugCounter < 1) {
+		if (ladyBugCounter == 0) {
 			player = new LadyBug();
-			this.collection.add(player); // switched arraylist to this.collection.add()
+			collection.add(player); // switched arraylist to this.collection.add()
 			ladyBugCounter++;
 			System.out.println(player.toString());
-			updateWorld();
-
+			setChanged();
+			notifyObservers(player);
 		} else {
 			System.out.println("Error: LadyBug cannot be created");
 		}
