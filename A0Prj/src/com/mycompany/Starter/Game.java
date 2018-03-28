@@ -168,7 +168,6 @@ public class Game extends Form {
 		mapWidth = center.getWidth();
 		mapHeight = center.getHeight();
 
-		gw = new GameWorld();
 		gw.addObserver(mapview);
 		gw.addObserver(scoreview);
 

@@ -58,7 +58,7 @@ public class GameWorld extends Observable {
 
 	public void updateWorld() {
 		setChanged();
-		notifyObservers();
+		notifyObservers("Some god damn output");
 	}
 
 	public void increaseSpeed() {
@@ -121,8 +121,8 @@ public class GameWorld extends Observable {
 			collection.add(player); // switched arraylist to this.collection.add()
 			ladyBugCounter++;
 			System.out.println(player.toString());
-			setChanged();
-			notifyObservers(player);
+			updateWorld();
+			
 		} else {
 			System.out.println("Error: LadyBug cannot be created");
 		}

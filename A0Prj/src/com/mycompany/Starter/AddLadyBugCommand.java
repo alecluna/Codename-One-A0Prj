@@ -10,7 +10,7 @@ public class AddLadyBugCommand extends Command {
 
 	public AddLadyBugCommand(GameWorld gw) {
 		super("Add Ladybug"); // set text in parent button class
-		this.gw = gw; // new gameworld instance
+		this.gw = gw; // matching gameworld instance
 	}
 
 	public static AddLadyBugCommand getInstance(GameWorld gw) { //return type is of AccelerateCommand object
