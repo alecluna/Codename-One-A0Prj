@@ -3,7 +3,7 @@ package com.mycompany.Starter;
 import com.mycompany.Starter.GameObject;
 import java.util.Vector;
 
-public class GameObjectCollection implements MyCollection{
+public class GameObjectCollection implements MyCollection {
 	@SuppressWarnings("rawtypes")
 	private Vector collection;
 

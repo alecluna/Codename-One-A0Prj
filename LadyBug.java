@@ -1,5 +1,9 @@
 package com.mycompany.Starter;
 
+import com.codename1.charts.models.Point;
+import com.codename1.ui.Graphics;
+import com.codename1.charts.util.ColorUtil;
+
 public class LadyBug extends Moveable implements Steerable {
 
 	private int maximumSpeed;
@@ -95,5 +99,16 @@ public class LadyBug extends Moveable implements Steerable {
 
 	public void decreaseSpeed() {
 		super.initialSpeed(getSpeed() - 15);
+	}
+
+	public void draw(Graphics g, Point relativePoint) {
+		g.setColor(ColorUtil.red(0));
+		int x = (int) (relativePoint.getX() + super.getLocX());
+		int y = (int) (relativePoint.getY() + super.getLocY());
+
+		g.fillRect(x, y, 10, 10);
+		g.drawRect(x, y, 10, 10);
+		// move();
+
 	}
 }

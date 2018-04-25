@@ -2,6 +2,10 @@ package com.mycompany.Starter;
 
 import java.util.Random;
 
+import com.codename1.charts.models.Point;
+import com.codename1.charts.util.ColorUtil;
+import com.codename1.ui.Graphics;
+
 public class Spider extends Moveable {
 
 	private int size;
@@ -37,6 +41,17 @@ public class Spider extends Moveable {
 		return ("Spider: loc=" + super.getLocX() + ", " + super.getLocY() + " color=[" + super.getRed() + ", "
 				+ super.getGreen() + ", " + "" + super.getBlue() + "] heading=" + super.getDirection() + " Speed= "
 				+ getSpeed() + " Size = " + getSize());
+	}
+	
+	public void draw(Graphics g, Point relativePoint) {
+		g.setColor(ColorUtil.CYAN);
+		int x = (int) (relativePoint.getX() + super.getLocX());
+		int y = (int) (relativePoint.getY() + super.getLocY());
+
+		g.fillRect(x, y, 40, 50);
+		g.drawRect(x, y, 40, 50);
+		// move();
+
 	}
 
 }

@@ -11,6 +11,8 @@ import com.mycompany.Starter.GameObjectCollection;
 
 public class GameWorld extends Observable {
 
+	private static int mapWidth;
+	private static int mapHeight;
 	private LadyBug player;
 	private int lives = 3;
 	private int ladyBugCounter = 0; // error checking so we dont add stuff before a ladybug
@@ -298,15 +300,5 @@ public class GameWorld extends Observable {
 		System.out.println("Player was hit by spider");
 		player.minusHealthLevel();
 
-	}
-
-	public void addObserver(Observer obj) {
-		// TODO Auto-generated method stub
-
-	}
-
-	public void notifyObserver() {
-		// TODO Auto-generated method stub
-
-	}
+	}	
 }

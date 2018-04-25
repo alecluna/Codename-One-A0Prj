@@ -1,7 +1,10 @@
 package com.mycompany.Starter;
 
 import java.util.Random;
+
+import com.codename1.charts.models.Point;
 import com.codename1.charts.util.ColorUtil;
+import com.codename1.ui.Graphics;
 
 public abstract class GameObject {
 
@@ -75,7 +78,8 @@ public abstract class GameObject {
 	public int getBlue() {
 		return ColorUtil.blue(color);
 	}
-
+		
+	
 	public abstract String toString();
 
 }

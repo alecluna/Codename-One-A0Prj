@@ -6,5 +6,4 @@ public interface MyIterator {
 	boolean hasNext();
 	GameObject getNext();
 	Object next();
-
 }
